@@ -25,7 +25,7 @@ app.post("/api/convert2rmd", function(req, res){
                 console.log(err); 
             }
             else {                
-                var json = fs.readFileSync(directory + filename, 'latin1');                                    
+                var json = fs.readFileSync(directory + filename, 'utf8');                                    
                 if(json) {
                     try {
                         //Example file which is given not a valid JSON file. Therefore, in type of ObjectId and ISODate fields are replaced as 1.
