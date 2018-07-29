@@ -1,0 +1,111 @@
+{
+  "stages": [{
+"cells":[
+  {   
+    "_id" : "5af613af4a280dfca3bba44c", 
+    "modified" : "2018-07-05T18:59:26.597Z", 
+    "code" : "# sf nesnesi \n`sf` nesnesi klasik `data.frame` nesnesinden kalitim alir.\n\nBir `sf` nesnesinin `sfc` sinifindan bir sütunu olmasi gerekir. Bu sütun, geometri verilerini tutar. `sfc` nesnesi herbir \n`data.frame` satiri için bir `sfg` nesnesi tutan bir `list` nesnesidir. \n\n![](https://github.com/r-spatial/sf/raw/master/vignettes/sf_xfig.png)\n\n## data.frame nesnesi ile sf yaratmak\n*meuse* adli data.frame, *x* ve *y* sütunlarinda mekansal koordinatlar, diger satirlarinda ise çesitli çevresel veriler içerir.", 
+    "language" : "Markdown", 
+    "owner" : "5ac4fac237bbed397167c7c4", 
+    "stage" : "5af612d14a280dfca3bba449", 
+    "project" : "5af612c24a280dfca3bba448", 
+    "index" : 3, 
+    "created" : "2018-05-11T22:05:35.393Z", 
+    "error" : [ ],
+    "evaluated" : true, 
+    "hiddenCode" : false, 
+    "__v" : 7
+  },	
+  { 
+    "_id" : "5af614774a280dfca3bba44e", 
+    "modified" : "2018-07-05T18:59:26.604Z", 
+    "code" : "*meuse* data.frame nesnesini *sf*'e çevirmek için  *st\\_as\\_sf()* fonksiyonunu kullanacagiz.", 
+    "language" : "Markdown", 
+    "owner" : "5ac4fac237bbed397167c7c4", 
+    "stage" : "5af612d14a280dfca3bba449", 
+    "project" : "5af612c24a280dfca3bba448", 
+    "index" : 4, 
+    "created" : "2018-05-11T22:08:55.102Z", 
+    "error" : [ ],
+    "evaluated" : true, 
+    "hiddenCode" : false, 
+    "__v" : 6
+  },
+  { 
+    "_id" : "5af614824a280dfca3bba44f", 
+    "modified" : "2018-07-05T18:59:26.797Z", 
+    "code" : "library(sf)\nms <- st_as_sf(\n  meuse, \n  coords = c('x', 'y'),\n  crs = \"+init=epsg:28992\"\n)\nclass(ms)\nhead(ms)", 
+    "language" : "R", 
+    "owner" : "5ac4fac237bbed397167c7c4", 
+    "stage" : "5af612d14a280dfca3bba449", 
+    "project" : "5af612c24a280dfca3bba448", 
+    "index" : 5, 
+    "created" : "2018-05-11T22:09:06.374Z", 
+    "error" : [ ], 
+    "evaluated" : true, 
+    "hiddenCode" : false, 
+    "__v" : 30
+  },
+  { 
+    "_id" : "5af614904a280dfca3bba450", 
+    "modified" : "2018-07-05T18:59:26.805Z", 
+    "code" : "Yukaridaki koda baktigimizda gözümüze çarpan seyler:\n- `ms` adli degisken'in sinifi : \"sf\" ve bu \"data.frame\" sinifindan kalit aliyor\n- nedir bu EPSG 28992? \n\nEPSG kodlari hakkinda daha fazla bilgiyi [spatialreference.org](http://spatialreference.org/ref/epsg/amersfoort-rd-new/)'da bulabiliriz.\n\n## Basit sf Geometri Türleri\n\n![](https://raw.githubusercontent.com/PranaGeo/spatialdatawithR_intro/master/images/geometry_types.png =800x600)", 
+    "language" : "Markdown", 
+    "owner" : "5ac4fac237bbed397167c7c4", 
+    "stage" : "5af612d14a280dfca3bba449", 
+    "project" : "5af612c24a280dfca3bba448", 
+    "index" : 6, 
+    "created" : "2018-05-11T22:09:20.949Z", 
+    "error" : [ ], 
+    "evaluated" : true, 
+    "hiddenCode" : false, 
+    "__v" : 10 
+  },
+  { 
+    "_id" : "5af614a64a280dfca3bba451", 
+    "modified" : "2018-07-05T18:59:26.811Z", 
+    "code" : "## Harita projeksiyon sistemleri\n3 boyutlu bir nesne olan gezegenimizin yüzeyini 2 boyutlu kagit ve ekranlarda göstermek için harita projeksiyon sistemleri kullanmaktayiz.\n\n![](https://raw.githubusercontent.com/PranaGeo/spatialdatawithR_intro/master/images/projection_families.png =800x600)\n\nDogru projeksiyon sistemi seçimi için mekanin ve yapilacak analiz türünün çok iyi bilnmesi gerekir.\n\n## R degiskenleri ile sf nesnesi yaratimi", 
+    "language" : "Markdown", 
+    "owner" : "5ac4fac237bbed397167c7c4", 
+    "stage" : "5af612d14a280dfca3bba449", 
+    "project" : "5af612c24a280dfca3bba448", 
+    "index" : 7, 
+    "created" : "2018-05-11T22:09:42.804Z", 
+    "error" : [ ], 
+    "evaluated" : true, 
+    "hiddenCode" : false, 
+    "__v" : 8 
+  },
+  { 
+    "_id" : 1, 
+    "modified" : "2018-07-05", 
+    "code" : "library(sf)\n#data.frame nesnesi olustur\nd = data.frame(a = 1:2)\n#her bir data.frame satiri için sfg nesnesi olustur\npt1 = st_point(c(0,1))\npt2 = st_point(c(1,1))\nclass(pt1)\n\n#sfc nesnesi olustur ve bunu \"geom\" adli sütuna tasi\nd$geom = st_sfc(pt1, pt2)\n#sf nesnesi yarat\nmy_sf = st_as_sf(d)\nclass(my_sf)", 
+    "language" : "R", 
+    "owner" : "1", 
+    "stage" : "1", 
+    "project" : "1", 
+    "index" : 8, 
+    "created" : "2018-05-11", 
+    "error" : [ ],  
+    "evaluated" : true, 
+    "hiddenCode" : false, 
+    "__v" : 18 
+  },
+  {
+    "_id" : 1, 
+    "modified" : "2018-07-05T18:59:26.918Z", 
+    "code" : "## sf nesnelerinin görsellenmesi\n\n*sf* paketi ile gelen *plot* metodu ile enteraktif olmayan ama hafizaya yük bindirmeyen haritalar çizebiliriz.  Asagidaki kod ile sadece *geometry* sütunu ile \nharita altligi çiziyoruz. **Attribute data** bilgisi görsellemiyoruz.\n", 
+    "language" : "Markdown", 
+    "owner" : "5ac4fac237bbed397167c7c4", 
+    "stage" : "5af612d14a280dfca3bba449", 
+    "project" : "5af612c24a280dfca3bba448", 
+    "index" : 9, 
+    "created" : "2018-05-11T22:13:20.411Z", 
+    "error" : [ ], 
+    "evaluated" : true, 
+    "hiddenCode" : false, 
+    "__v" : 5 
+  }
+]
+}]
+}
