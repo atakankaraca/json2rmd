@@ -1,27 +1,31 @@
 const express = require('express'),
       app = express(),
       fs = require('fs'),
-      path = require('path'),
       upload = require('express-fileupload'),
       helper = require('./helper');
+
+const directory = "./files/";
 
 app.use(upload())
 
 app.get("/", function(req, res){
-    res.sendFile(__dirname+"/index.html");
+    res.sendFile(__dirname + "/index.html");
 })
 
 app.post("/api/convert2rmd", function(req, res){
     if(req.files)
     {
         var file = req.files.filename, filename = file.name;
-        file.mv('./files/'+ filename, function(err){
+
+        helper.checkDirectory(directory);
+
+        file.mv(directory + filename, function(err){
             if(err)
             {
                 console.log(err); 
             }
             else {                
-                var json = fs.readFileSync('./files/'+ filename, 'latin1');                                    
+                var json = fs.readFileSync(directory + filename, 'latin1');                                    
                 if(json) {
                     try {
                         //Example file which is given not a valid JSON file. Therefore, in type of ObjectId and ISODate fields are replaced as 1.
@@ -46,7 +50,7 @@ app.post("/api/convert2rmd", function(req, res){
 })
 
 app.get('/api/download/:filename', function(req, res){
-    var file = __dirname + "/files/createdfiles/" + req.params.filename;
+    var file = __dirname + directory.replace(".", "") + req.params.filename;
     res.download(file);
 })
 

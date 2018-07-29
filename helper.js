@@ -1,18 +1,18 @@
 var fs = require('fs');
 var path = require('path');
+var directory = './files/';
 
-//function that wraps content as "R or Python" and creates file to /files/createdfiles/ path
+//Function that wraps content as "R or Python" and creates file to /files/createdfiles/ path
 function rmdFileCreator(cells)
-{
+{    
     filePaths = [];
 
     for(var i = 0; i < cells.length; i++){  
         var fileContent = cells[i].code;
         var fileLanguage = cells[i].language;
-        var filePath = './files/createdfiles/' + cells[i].index + "-" + cells[i].language + ".rmd";
+        var filePath = directory + cells[i].index + "-" + cells[i].language + ".rmd";
 
         var wrappedFile = fileWrapper(fileContent, fileLanguage);
-
         fs.writeFile(filePath, wrappedFile, function (err) {
             if(err){
                 return err;
@@ -55,4 +55,12 @@ function generateRmdFiles(cells) {
     return downloadLinksAsHtml;
 }
 
+function checkDirectory(directoryName) {
+    if(!fs.existsSync(directoryName))
+    {
+        fs.mkdirSync(directoryName);
+    }
+}
+
 module.exports.generateRmdFiles = generateRmdFiles;
+module.exports.checkDirectory = checkDirectory;
